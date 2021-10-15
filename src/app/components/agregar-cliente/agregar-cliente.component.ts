@@ -25,11 +25,10 @@ export class AgregarClienteComponent implements OnInit {
   ngOnInit(): void {
 
     if (this.id != 'agregar') {
-      console.log("sera modificar");
       this.booleanAgregar = false;
       this.peticionEditar(this.id)
     } else {
-      console.log("Es agregar");
+      this.booleanAgregar = true;
       this.cargando = false;
       this.inicializarAgregar()
     }
@@ -51,7 +50,6 @@ export class AgregarClienteComponent implements OnInit {
 
   peticionEditar(id: string) {
     this._clienteService.obtenerCliente(id).subscribe(resp => {
-      console.log(resp);
       this.clienteModel = resp;
       this.cargando = false;
       this.inicializarEditar(this.clienteModel)
@@ -72,9 +70,6 @@ export class AgregarClienteComponent implements OnInit {
 
   guardar() {
     this.agregarForm.value['telefono'] = parseInt(this.agregarForm.value['telefono'])
-    console.log(typeof this.agregarForm.value['telefono']);
-
-    console.log(this.agregarForm);
 
     if (this.agregarForm.invalid) { this.agregarForm.markAllAsTouched(); return }
     let texto = 'agregar';
@@ -91,7 +86,6 @@ export class AgregarClienteComponent implements OnInit {
       showConfirmButton: true,
       showCancelButton: true
     }).then(resp => {
-      console.log(resp);
       if (resp.value) {
 
         Swal.fire({
@@ -102,12 +96,10 @@ export class AgregarClienteComponent implements OnInit {
         Swal.showLoading();
 
         this.clienteModel = this.agregarForm.value;
-        console.log(this.clienteModel);
 
         if (this.booleanAgregar) {
 
           this._clienteService.agregarCliente(this.clienteModel).then(resp => {
-            console.log(resp);
             Swal.fire({
               title: 'Cliente agregado',
               text: `Se ha agregado correctamente a ${this.clienteModel.nombre}`,
@@ -128,18 +120,13 @@ export class AgregarClienteComponent implements OnInit {
         } else {
 
           this.clienteModel.id = this.id
-          console.log(this.clienteModel.nombre);
           
           this._clienteService.actualizarCliente(this.clienteModel).then(resp => {
-            console.log(resp);
             Swal.fire({
               title: 'Cliente actualizado',
               text: `Se actualizaron correctamente los datos`,
               icon: 'success'
             })
-            // this.agregarForm.reset({
-            //   estado: 'Soltero'
-            // })
             this.router.navigateByUrl('/clientes')
 
           }).catch(error => {
