@@ -17,6 +17,7 @@ export class ListaClientesComponent implements OnInit {
   nombre: string;
   busquedaNombre: any = '';
   buscar: string;
+  click: number = 0;
 
   clienteTemporal: ClienteModel[] = [];
 
@@ -86,10 +87,12 @@ export class ListaClientesComponent implements OnInit {
   resetear(){
     if(this.clienteTemporal.length > 0){
       this.clienteModel = this.clienteTemporal
+      this.click = 0;
     }
   }
 
   buscarMetodo(dato: string){
+    this.click++;
 
     let array = []
     this.clienteModel.filter(datos => {
@@ -100,8 +103,11 @@ export class ListaClientesComponent implements OnInit {
       }
     })
 
-    this.clienteTemporal = this.clienteModel
-    this.clienteModel = array;
+    if(this.click == 1){
+      this.clienteTemporal = this.clienteModel
+      this.clienteModel = array;
+    }
+    
 
   }
 
