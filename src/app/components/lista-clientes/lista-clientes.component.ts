@@ -14,6 +14,8 @@ export class ListaClientesComponent implements OnInit {
 
   clientes: Observable<any[]>;
   clienteModel: ClienteModel[] = []
+  nombre: string;
+  busquedaNombre: any;
 
   constructor(firestore: AngularFirestore, private _clienteService: ClienteService) {
     this.clientes = firestore.collection('clientes').valueChanges();
@@ -58,10 +60,22 @@ export class ListaClientesComponent implements OnInit {
             icon: 'error'
           })
         })
-        
+
       }
     })
 
+  }
+
+  consultaByNombre(nombre: string){
+    console.log(nombre);
+    // return
+    this._clienteService.obtenerClienteByNombre(nombre).subscribe(resp => {
+      console.log(resp);
+      this.busquedaNombre = resp;
+    }, error=> {
+      this.busquedaNombre = '';
+      console.log(error);
+    })
   }
 
 }

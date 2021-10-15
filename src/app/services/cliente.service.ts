@@ -62,14 +62,16 @@ export class ClienteService {
   actualizarCliente(cliente: ClienteModel): Promise<any>{
     const id = cliente.id
     delete cliente.id;
-    console.log(cliente);
-    console.log(id);
     
     return this.firestore.collection('cliente').doc(id).update(cliente)
   }
 
   eliminarCliente(id: string): Promise<any> {
     return this.firestore.collection('cliente').doc(id).delete();
+  }
+
+  obtenerClienteByNombre(nombre: string): Observable<any>{
+    return this.firestore.collection('cliente', ref => ref.where("nombre", "==", nombre )).valueChanges()
   }
 
 
