@@ -47,7 +47,7 @@
 
   <pre *ngIf="this.busquedaNombre">
           <h2>Resultado búsqueda</h2>
-          {{this.busquedaNombre[0] | json}}
+          {{this.busquedaNombre | json}}
       </pre>
 
   <p *ngIf="this.busquedaNombre == null">

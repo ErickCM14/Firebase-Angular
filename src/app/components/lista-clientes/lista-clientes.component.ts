@@ -72,7 +72,6 @@ export class ListaClientesComponent implements OnInit {
 
   consultaByNombre(nombre: string){
     this._clienteService.obtenerClienteByNombre(nombre).subscribe(resp => {
-      console.log(resp);
       if(resp.length > 0){
         this.busquedaNombre = resp;
       }else{
