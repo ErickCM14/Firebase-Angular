@@ -1,48 +1,59 @@
 <app-header></app-header>
 <main class="container mt-5">
-    <button type="button" class="btn btn-primary" [routerLink]="['/clientes', 'agregar' ]">Agregar</button>
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Descripción</th>
-            <th scope="col">Email</th>
-            <th scope="col">Teléfono</th>
-            <th scope="col">Estado Civil</th>
-            <th scope="col">Opciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let cliente of clienteModel">
-            <!-- <th scope="row">1</th> -->
-            <td>{{cliente.nombre}}</td>
-            <td>{{cliente.descripcion}}</td>
-            <td>{{cliente.correo}}</td>
-            <td>{{cliente.telefono}}</td>
-            <td>{{cliente.estado}}</td>
-            <td class="d-flex gap-2">
-                <span class="form-text text-primary cursor" [routerLink]="['/clientes', cliente.id ]" >Editar</span>
-                <span (click)="eliminarCliente(cliente)" class="form-text text-danger cursor">Eliminar</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+  <div class="row mb-3">
+    <div class="col-4">
+      <button type="button" class="btn btn-primary" [routerLink]="['/clientes', 'agregar' ]">Agregar</button>
+    </div>
+  </div>
 
-      <h3 class="mt-5">Buscar nombre</h3>
-      <div class="input-group mb-3">
-        <input type="text" [(ngModel)]="this.nombre" class="form-control" placeholder="Escribe el nombre a buscar" >
-        <button class="btn btn-outline-secondary" (click)="consultaByNombre(this.nombre)" type="button">Buscar</button>
-      </div>
+  <div class="col-12 input-group mb-3">
+    <input type="text" class="form-control me-3" [(ngModel)]="this.buscar">
+    <button type="button" (click)="buscarMetodo(this.buscar)" class="btn btn-secondary me-3">Buscar </button>
+    <button type="button" class="btn btn-dark" (click)="resetear()">Resetear</button>
+  </div>
 
-      <pre *ngIf="this.busquedaNombre ">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Descripción</th>
+        <th scope="col">Email</th>
+        <th scope="col">Teléfono</th>
+        <th scope="col">Estado Civil</th>
+        <th scope="col">Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cliente of clienteModel">
+        <!-- <th scope="row">1</th> -->
+        <td>{{cliente.nombre}}</td>
+        <td>{{cliente.descripcion}}</td>
+        <td>{{cliente.correo}}</td>
+        <td>{{cliente.telefono}}</td>
+        <td>{{cliente.estado}}</td>
+        <td class="d-flex gap-2">
+          <span class="form-text text-primary cursor" [routerLink]="['/clientes', cliente.id ]">Editar</span>
+          <span (click)="eliminarCliente(cliente)" class="form-text text-danger cursor">Eliminar</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="mt-5">Buscar nombre</h3>
+  <div class="input-group mb-3">
+    <input type="text" [(ngModel)]="this.nombre" class="form-control" placeholder="Escribe el nombre a buscar">
+    <button class="btn btn-outline-secondary" (click)="consultaByNombre(this.nombre)" type="button">Buscar</button>
+  </div>
+
+  <pre *ngIf="this.busquedaNombre">
           <h2>Resultado búsqueda</h2>
           {{this.busquedaNombre[0] | json}}
       </pre>
 
-      <p *ngIf="this.busquedaNombre == ''">
-        <span>No hay resultados que coincidan con la búsqueda</span>
-      </p>
-      
+  <p *ngIf="!this.busquedaNombre">
+    <span>No hay resultados que coincidan con la búsqueda</span>
+  </p>
+
 
 
 </main>

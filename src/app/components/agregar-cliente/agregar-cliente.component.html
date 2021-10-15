@@ -23,7 +23,7 @@
                 <span *ngIf="getErrores('correo')" class="form-text text-danger">Este campo es requerido, debe ser tipo email y recibe un máximo de 250 caracteres</span>
             </div>
             <div class="mb-3">
-                <input type="number" formControlName="telefono" name="telefono" class="form-control" id="telefonoForm"
+                <input type="tel" formControlName="telefono" name="telefono" class="form-control" id="telefonoForm"
                     placeholder="Ingrese su teléfono">
                 <span *ngIf="getErrores('telefono')" class="form-text text-danger">Este campo es requerido, de tipo númerico y recibe máximo 10
                         caracteres</span>

@@ -16,6 +16,9 @@ export class ListaClientesComponent implements OnInit {
   clienteModel: ClienteModel[] = []
   nombre: string;
   busquedaNombre: any;
+  buscar: string;
+
+  clienteTemporal: ClienteModel[] = [];
 
   constructor(firestore: AngularFirestore, private _clienteService: ClienteService) {
     this.clientes = firestore.collection('clientes').valueChanges();
@@ -67,15 +70,39 @@ export class ListaClientesComponent implements OnInit {
   }
 
   consultaByNombre(nombre: string){
-    console.log(nombre);
-    // return
     this._clienteService.obtenerClienteByNombre(nombre).subscribe(resp => {
       console.log(resp);
-      this.busquedaNombre = resp;
+      if(resp.length > 0){
+        this.busquedaNombre = resp;
+      }else{
+        this.busquedaNombre = null;
+      }
     }, error=> {
       this.busquedaNombre = '';
       console.log(error);
     })
+  }
+
+  resetear(){
+    if(this.clienteTemporal.length > 0){
+      this.clienteModel = this.clienteTemporal
+    }
+  }
+
+  buscarMetodo(dato: string){
+
+    let array = []
+    this.clienteModel.filter(datos => {
+      
+      if(datos.nombre.includes(dato) || datos.correo.includes(dato) || datos.descripcion.includes(dato) || datos.estado.includes(dato))
+      {
+        array.push(datos)
+      }
+    })
+
+    this.clienteTemporal = this.clienteModel
+    this.clienteModel = array;
+
   }
 
 }
