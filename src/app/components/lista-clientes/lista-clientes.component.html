@@ -12,32 +12,35 @@
     <button type="button" class="btn btn-dark" (click)="resetear()">Resetear</button>
   </div>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Nombre</th>
-        <th scope="col">Descripción</th>
-        <th scope="col">Email</th>
-        <th scope="col">Teléfono</th>
-        <th scope="col">Estado Civil</th>
-        <th scope="col">Opciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let cliente of clienteModel">
-        <!-- <th scope="row">1</th> -->
-        <td>{{cliente.nombre}}</td>
-        <td>{{cliente.descripcion}}</td>
-        <td>{{cliente.correo}}</td>
-        <td>{{cliente.telefono}}</td>
-        <td>{{cliente.estado}}</td>
-        <td class="d-flex gap-2">
-          <span class="form-text text-primary cursor" [routerLink]="['/clientes', cliente.id ]">Editar</span>
-          <span (click)="eliminarCliente(cliente)" class="form-text text-danger cursor">Eliminar</span>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Descripción</th>
+          <th scope="col">Email</th>
+          <th scope="col">Teléfono</th>
+          <th scope="col">Estado Civil</th>
+          <th scope="col">Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cliente of clienteModel">
+          <!-- <th scope="row">1</th> -->
+          <td>{{cliente.nombre}}</td>
+          <td>{{cliente.descripcion}}</td>
+          <td>{{cliente.correo}}</td>
+          <td>{{cliente.telefono}}</td>
+          <td>{{cliente.estado}}</td>
+          <td class="d-flex gap-2">
+            <span class="form-text text-primary cursor" [routerLink]="['/clientes', cliente.id ]">Editar</span>
+            <span (click)="eliminarCliente(cliente)" class="form-text text-danger cursor">Eliminar</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
 
   <h3 class="mt-5">Buscar nombre</h3>
   <div class="input-group mb-3">
