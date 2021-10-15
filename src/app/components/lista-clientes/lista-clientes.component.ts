@@ -15,7 +15,7 @@ export class ListaClientesComponent implements OnInit {
   clientes: Observable<any[]>;
   clienteModel: ClienteModel[] = []
   nombre: string;
-  busquedaNombre: any;
+  busquedaNombre: any = '';
   buscar: string;
 
   clienteTemporal: ClienteModel[] = [];

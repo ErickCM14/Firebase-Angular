@@ -50,7 +50,7 @@
           {{this.busquedaNombre[0] | json}}
       </pre>
 
-  <p *ngIf="!this.busquedaNombre">
+  <p *ngIf="this.busquedaNombre == null">
     <span>No hay resultados que coincidan con la búsqueda</span>
   </p>
 
