@@ -1,0 +1,42 @@
+<app-header></app-header>
+<main class="container mt-5">
+    <button type="button" class="btn btn-danger" [routerLink]="['/clientes']">Regresar</button>
+    <section *ngIf="!this.cargando" class="row mt-3">
+        <h1 class="mb-3">Formulario de registro</h1>
+        <form [formGroup]="agregarForm" (ngSubmit)="guardar()" autocomplete="off">
+            <div class="mb-3">
+                <!-- <label for="exampleFormControlInput1" class="form-label">Email address</label> -->
+                <input type="text" formControlName="nombre" name="nombre" class="form-control" id="nombreForm"
+                    placeholder="Ingrese su nombre">
+                <span *ngIf="getErrores('nombre')" class="form-text text-danger">Este campo es requerido, no recibe símbolos ni números y recibe máximo 80
+                        caracteres</span>
+            </div>
+            <div class="mb-3">
+                <textarea class="form-control" formControlName="descripcion" name="descripcion" id="descripcionForm"
+                    rows="4" placeholder="Ingrese una descripción"></textarea>
+                <span *ngIf="getErrores('descripcion')" class="form-text text-danger">Este campo no recibe símbolos ni números y recibe máximo 80
+                        caracteres</span>
+            </div>
+            <div class="mb-3">
+                <input type="email" formControlName="correo" name="correo" class="form-control" id="correoForm"
+                    placeholder="Ingrese su correo">
+                <span *ngIf="getErrores('correo')" class="form-text text-danger">Este campo es requerido, debe ser tipo email y recibe un máximo de 250 caracteres</span>
+            </div>
+            <div class="mb-3">
+                <input type="number" formControlName="telefono" name="telefono" class="form-control" id="telefonoForm"
+                    placeholder="Ingrese su teléfono">
+                <span *ngIf="getErrores('telefono')" class="form-text text-danger">Este campo es requerido, de tipo númerico y recibe máximo 10
+                        caracteres</span>
+            </div>
+            <select class="mb-3 form-select" formControlName="estado">
+                <option value="Soltero">Soltero</option>
+                <option value="Casado">Casado</option>
+                <option value="Divorciado">Divorciado</option>
+                <option value="Viudo">Viudo</option>
+            </select>
+
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </section>
+
+</main>
